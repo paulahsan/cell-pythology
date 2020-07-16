@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Immunostaining data vizualization - Python Meets Celln</title>
+
+  <!-- Edit site and author settings in `_config.yml` to make the social details your own -->
+
+    <meta content="Python Meets Celln" property="og:site_name">
+  
+    <meta content="Immunostaining data vizualization" property="og:title">
+  
+  
+    <meta content="article" property="og:type">
+  
+  
+    <meta content="Discussion on collection of immunostaining data." property="og:description">
+  
+  
+    <meta content="http://localhost:4000/immunostaining-data-collection/" property="og:url">
+  
+  
+    <meta content="2020-07-17T03:05:00+09:00" property="article:published_time">
+    <meta content="http://localhost:4000/about/" property="article:author">
+  
+  
+    <meta content="http://localhost:4000/cell-pythology/assets/img/Ahsan_Profile_.png" property="og:image">
+  
+  
+    
+  
+  
+    
+    <meta content="data" property="article:tag">
+    
+    <meta content="tidy data" property="article:tag">
+    
+    <meta content="immunostaining" property="article:tag">
+    
+    <meta content="data viz" property="article:tag">
+    
+  
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@">
+    <meta name="twitter:creator" content="@">
+  
+    <meta name="twitter:title" content="Immunostaining data vizualization">
+  
+  
+    <meta name="twitter:url" content="http://localhost:4000/immunostaining-data-collection/">
+  
+  
+    <meta name="twitter:description" content="Discussion on collection of immunostaining data.">
+  
+  
+    <meta name="twitter:image:src" content="http://localhost:4000/cell-pythology/assets/img/Ahsan_Profile_.png">
+  
+
+	<meta name="description" content="Discussion on collection of immunostaining data.">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta property="og:image" content="">
+	<link rel="shortcut icon" href="/cell-pythology/assets/img/favicon/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" href="/cell-pythology/assets/img/favicon/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/cell-pythology/assets/img/favicon/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/cell-pythology/assets/img/favicon/apple-touch-icon-144x144.png">
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="#263959">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="#263959">
+	<!-- iOS Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="#263959">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif:400,700|Lato:300,400,700&display=swap" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="/cell-pythology/assets/fonts/font-awesome/css/font-awesome.min.css">
+	<!-- Styles -->
+	<link rel="stylesheet" href="/cell-pythology/assets/css/main.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <aside class="sidebar">
+  <header>
+    <div class="about">
+      <div class="cover-author-image">
+        <a href="/cell-pythology/"><img src="/cell-pythology/assets/img/Ahsan_Profile_.png" alt="Ahsan"></a>
+      </div>
+      <div class="author-name">Ahsan</div>
+      <p>I am a Life Science Informatician focusing on Cheminformatics and Computational Biology. Always hungry to keep learning.</p>
+    </div>
+  </header> <!-- End Header -->
+  <footer>
+    <section class="contact">
+      <h3 class="contact-title">Contact me</h3>
+      <ul>
+        <!--
+          <li><a href="https://twitter.com/artemsheludko_" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+          -->
+          <li><a href="http://localhost:4000" target="_blank"><i class="fa fa-at" aria-hidden="true"></i></a></li>
+        
+          <li><a href="https://facebook.com/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+        
+        
+          <li class="github"><a href="http://github.com/paulahsan" target="_blank"><i class="fa fa-github"></i></a></li>
+        
+        
+          <li class="linkedin"><a href="https://in.linkedin.com/in/paulahsan" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+        
+        
+          <li class="email"><a href="mailto:example.david@blog.com"><i class="fa fa-envelope-o" aria-hidden="true"></i></a></li>
+        
+      </ul>
+    </section> <!-- End Section Contact -->
+    <div class="copyright">
+      <p>2020 &copy; Ahsan</p>
+    </div>
+  </footer> <!-- End Footer -->
+</aside> <!-- End Sidebar -->
+<div class="content-box clearfix">
+  <article class="article-page">
+  <div class="page-content">
+    
+    
+    <div class="wrap-content">
+      <header class="header-page">
+        <h1 class="page-title">Immunostaining data vizualization</h1>
+        <div class="page-date"><span>2020, Jul 17&nbsp;&nbsp;&nbsp;&nbsp;</span></div>
+      </header>
+      <p>Immunostaining is one of the widely used methods by the cell biolgists to evaluate kinatics of 
+DNA repair. A very common example of such technique could be staining gH2AX or RAD50 proteins in 
+the nucleus and measure DNA repair kinetics.</p>
+
+<p>For the sake of the discussion lelt’s assume there is a wild type cell line (WT) and a mutant 
+cell line (MUT); the MUT is incapable of repair double strand break (DSB). We grow both of the 
+cell lines in same condition and then expose them to ionizing radiation to induce DSB <sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>. 
+Upon sensing the DSB, the cells will activate some pathways via some signaling so that the DSB 
+is repaired and the genome become intact.</p>
+
+<blockquote>
+  <p>Histones are abundant proteins on the DNA, one of them is H2A, combinedly called H2AX. After 
+sensing DSB these H2AX are phorphorylated at Serine-139 and then the H2AX are called phosphorylated 
+H2AX or γH2AX. Presence of γH2AX are the marker for unrepaired DSB. These proteins are fixed 
+<em>in situ</em> and tagged with fluorescent antibody. Afterwards they can be easily visualized via 
+microscopy. Generally they appear as small spots and are called γH2AX foci.<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup></p>
+</blockquote>
+
+<p>Let’s get back to our experiment. Because the MUT cell line will fail to repair DSB, the γH2AX 
+foci around DSB sites will be consistently high. On the other hand, for the WT cell line, 
+initially the γH2AX foci count will be high and eventually will reduce, as the DNA is repaired.
+For instance, if we collect samples 30 minutes, 1 hr and 2 hr after exoposing IR, for the WT 
+cells foci count at 30 minutes will be highest which will gradually return to normal level by
+1 hr and 2 hr.</p>
+
+<p>In this blog we will discuss the following things:</p>
+<ol>
+  <li>How to save the data.</li>
+  <li>How to vizualize them.</li>
+</ol>
+
+<p>Historically cell biologists utilize spreadsheets i.e MS Excel or any similar apps and record 
+the data. I and some of my colleagues use the following pattern to recod the data.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>WT_IR_0</th>
+      <th>WT_IR_30</th>
+      <th>WT_IR_60</th>
+      <th>WT_IR_90</th>
+      <th>MUT_IR_0</th>
+      <th>MUT_IR_30</th>
+      <th>MUT_IR_60</th>
+      <th>MUT_IR_90</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10</td>
+      <td>10</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Each of the columns are representing experiemntal condition and each of the rows are indicating
+ the respective foci numbers in a sigle cell. This format is often refrred to as wide form of 
+ data. Generally, this types of experiments enlist 50 of such observations. 
+Three replicates are done of the experiments and then consecutive statistical analyses are
+done. This will be discussed in a near future blog. However, there are substantial drawbacks 
+with this formating:</p>
+<ol>
+  <li>First of all this is not a <em>tidy data</em>.</li>
+  <li>This format is problematic to handle.</li>
+</ol>
+
+<p>Before showing the right format we will actually show how to convert this format to a <em>tidy 
+format</em>.</p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Initially it could be single strand break or any other anomaly in the DNA which eventually is converted to a DSB. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p><a href="https://www.nature.com/articles/leu20106">γH2AX: a sensitive molecular marker of DNA damage and repair</a> <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+      <div class="page-footer">
+        <div class="page-share">
+            <a href="https://twitter.com/intent/tweet?text=Immunostaining data vizualization&url=http://localhost:4000/cell-pythology/immunostaining-data-collection/" title="Share on Twitter" rel="nofollow" target="_blank">Twitter</a>
+            <a href="https://facebook.com/sharer.php?u=http://localhost:4000/cell-pythology/immunostaining-data-collection/" title="Share on Facebook" rel="nofollow" target="_blank">Facebook</a>
+      </div> 
+      <!--<div id="share-bar">
+
+    <h4>Share this:</h4>
+
+    <div class="share-buttons">
+        <a  href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/cell-pythology/immunostaining-data-collection/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Facebook" >
+            <i class="fa fa-facebook-official share-button"> facebook</i>
+        </a>
+
+        <a  href="https://twitter.com/intent/tweet?text=Immunostaining data vizualization&url=http://localhost:4000/cell-pythology/immunostaining-data-collection/"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on Twitter" >
+            <i class="fa fa-twitter share-button"> twitter</i>
+        </a>
+
+        <a  href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/cell-pythology/immunostaining-data-collection/&title=Immunostaining data vizualization&summary=Discussion on collection of immunostaining data.&source=Python Meets Celln"
+            onclick="window.open(this.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"
+            title="Share on LinkedIn" >
+            <i class="fa fa-linkedin share-button"> linkedin</i>
+        </a>
+
+        <a  href="mailto:?subject=Immunostaining data vizualization&amp;body=Check out this site http://localhost:4000/cell-pythology/immunostaining-data-collection/"
+            title="Share via Email" >
+            <i class="fa fa-envelope share-button"> email</i>
+        </a>
+    </div>
+
+</div>#
+-->
+        <div class="page-tag">
+          
+            <a href="/cell-pythology/tags#data" class="tag">&#35; data</a>
+          
+            <a href="/cell-pythology/tags#tidy data" class="tag">&#35; tidy data</a>
+          
+            <a href="/cell-pythology/tags#immunostaining" class="tag">&#35; immunostaining</a>
+          
+            <a href="/cell-pythology/tags#data viz" class="tag">&#35; data viz</a>
+          
+        </div>
+      </div>
+      <section class="comment-area">
+  <div class="comment-wrapper">
+    
+  </div>
+</section> <!-- End Comment Area -->
+
+    </div> <!-- End Wrap Content -->
+  </div> <!-- End Page Content -->
+</article> <!-- End Article Page -->
+
+</div>
+
+  </div>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script> <!-- End Analytics -->
+
+</body>
+</html>
