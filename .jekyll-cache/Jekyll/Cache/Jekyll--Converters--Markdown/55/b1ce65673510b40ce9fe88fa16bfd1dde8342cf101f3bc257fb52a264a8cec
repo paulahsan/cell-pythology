@@ -1,0 +1,16 @@
+I"<p>There are many Biologists like me who are unwilling to learn few line of codes so that they can build their own small tools to <em>move a mountain<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup></em></p>
+
+<p>In this blog I will try to show how a few lines of code could help a biologist making nice vizualizations or do computations with ease.</p>
+
+<p>I will consider cell biology data and mostly use Python and Bash (Zsh) shell to perform exploratory analysis or vizualize them. Hence the name <strong>Cell-Pythology</strong></p>
+
+<hr />
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>Young Sheldon <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET
