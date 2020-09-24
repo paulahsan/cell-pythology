@@ -176,7 +176,7 @@ plt.show()
 ![violinplot]({{site.baseurl}}/assets/img/violinplot_wide_form.png)
 
 
-### Try other different form of plots sytematically
+### Try other different form of plots systematically
 
 
 ```python
