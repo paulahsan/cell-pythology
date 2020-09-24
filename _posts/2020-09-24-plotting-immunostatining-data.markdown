@@ -3,11 +3,10 @@ layout: post
 title: Plotting Immunostaining Data
 date: 2020-09-24 16:05:00 +0900
 description: Tutorial for plotting immunostaining data. # Add post description (optional)
-img: #h2ax-fig-comparison.png #immunostaining-data-collection.png
-fig-caption: H2AX foci in different condition # Add figcaption (optional)
+img: banner-wide-violinplot.png
+fig-caption: wide form violinplot source:https://seaborn.pydata.org/examples/wide_form_violinplot.html 
 tags: [data plotting, wide form data, immunostaining, data viz]
 ---
-# Plotting immunostaining data with python
 In this tutorial we will gernerate a demo immunostaining data and show how to plot it into different types of plots.
 
 ## Import important libraries
@@ -152,7 +151,7 @@ sns.boxplot(data=df);
 ```
 
 
-![png](simple_boxplot_wide_form.png)
+![boxplot]({{site.baseurl}}/assets/img/simple_boxplot_wide_form.png)
 
 
 Reader may try the following
@@ -174,7 +173,7 @@ plt.show()
 ```
 
 
-![png](violinplot_wide_form.png)
+![violinplot]({{site.baseurl}}/assets/img/violinplot_wide_form.png)
 
 
 ### Try other different form of plots sytematically
@@ -198,7 +197,7 @@ for idx, plot in enumerate(plot_type):
 ```
 
 
-![png](seaborn_all_plots_wide_form.png)
+![all_plot]({{site.baseurl}}/assets/img/seaborn_all_plots_wide_form.png)
 
 
 Now breakdown the above code for beginners. 

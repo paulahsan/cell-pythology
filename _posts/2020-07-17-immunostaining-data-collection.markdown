@@ -3,7 +3,7 @@ layout: post
 title: Immunostaining data vizualization
 date: 2020-07-17 03:05:00 +0900
 description: Discussion on collection of immunostaining data. # Add post description (optional)
-img: #h2ax-fig-comparison.png #immunostaining-data-collection.png
+img: h2ax-fig-comparison.png #immunostaining-data-collection.png
 fig-caption: H2AX foci in different condition # Add figcaption (optional)
 tags: [data, tidy data, immunostaining, data viz]
 ---

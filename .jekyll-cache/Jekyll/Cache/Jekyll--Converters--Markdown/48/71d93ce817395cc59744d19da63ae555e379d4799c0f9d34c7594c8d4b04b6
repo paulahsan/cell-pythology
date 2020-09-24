@@ -1,0 +1,182 @@
+I"74<p>In this tutorial we will gernerate a demo immunostaining data and show how to plot it into different types of plots.</p>
+
+<h2 id="import-important-libraries">Import important libraries</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># numerical python
+</span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="c1"># dataframe implementation in python
+</span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="c1"># vizualization library in python
+</span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="c1"># vizualization librariy based on matplotlib
+</span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="n">sns</span>
+</code></pre></div></div>
+
+<h2 id="make-a-random-dataset">Make a random dataset</h2>
+
+<h3 id="generate-a-random-array">Generate a random array</h3>
+
+<p>fix a seed value so that resut become reproducible</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>generate an array of random integers with 50 rows and 4 columns
+the lowest and highest number in the array would be 3 and 10 respectively</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="p">.</span><span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">high</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>this can also be written as simple as 
+data=np.random.randint(3,10,(50,4))</p>
+
+<p>as the data have 4 columns, lets assume they stand for
+experiemntal conditions and represent column names</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">header</span><span class="o">=</span><span class="p">[</span><span class="s">"WT_IR_0"</span><span class="p">,</span><span class="s">"WT_IR_30"</span><span class="p">,</span><span class="s">"MU_IR_0"</span><span class="p">,</span><span class="s">"MU_IR_30"</span><span class="p">]</span>
+</code></pre></div></div>
+
+<h3 id="convert-array-into-a-dataframe">Convert array into a dataframe</h3>
+<p>make a dataframe by combining the data with header</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="o">=</span><span class="n">pd</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Print the first five lines of the data.</p>
+
+<p>This is called wide form of data</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">df</span><span class="p">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div></div>
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>WT_IR_0</th>
+      <th>WT_IR_30</th>
+      <th>MU_IR_0</th>
+      <th>MU_IR_30</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6</td>
+      <td>7</td>
+      <td>4</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8</td>
+      <td>5</td>
+      <td>3</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>3</td>
+      <td>8</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7</td>
+      <td>4</td>
+      <td>6</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="plotting-the-data">Plotting the data</h2>
+
+<h3 id="make-a-boxplot-out-of-the-data">Make a boxplot out of the data</h3>
+<p>Using the boxplot function of seaborn module generate a boxplot</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sns</span><span class="p">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><img src="/cell-pythology/assets/img/simple_boxplot_wide_form.png" alt="boxplot" /></p>
+
+<p>Reader may try the following</p>
+
+<p><code class="language-plaintext highlighter-rouge">sns.boxplot(data=df)</code>ommitting the colon<code class="language-plaintext highlighter-rouge">";"</code>, or just writing</p>
+
+<p><code class="language-plaintext highlighter-rouge">sns.boxplot(df)</code> and see the differences among outputs</p>
+
+<h3 id="make-a-violinplot-out-of--the-data">Make a violinplot out of  the data</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sns</span><span class="p">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s">"point"</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">'RdBu'</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Violin plot"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"Cell line and condition"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"Number of foci"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/cell-pythology/assets/img/violinplot_wide_form.png" alt="violinplot" /></p>
+
+<h3 id="try-other-different-form-of-plots-sytematically">Try other different form of plots sytematically</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">custom_pallette</span><span class="o">=</span><span class="p">[</span><span class="s">'salmon'</span><span class="p">,</span><span class="s">'cyan'</span><span class="p">,</span><span class="s">'lavender'</span><span class="p">,</span><span class="s">'palegreen'</span><span class="p">]</span>
+<span class="n">plot_type</span><span class="o">=</span> <span class="p">[</span><span class="n">sns</span><span class="p">.</span><span class="n">violinplot</span><span class="p">,</span><span class="n">sns</span><span class="p">.</span><span class="n">boxplot</span><span class="p">,</span> <span class="n">sns</span><span class="p">.</span><span class="n">boxenplot</span><span class="p">,</span> <span class="n">sns</span><span class="p">.</span><span class="n">swarmplot</span><span class="p">]</span> 
+
+<span class="n">fig</span><span class="p">,</span><span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+                      <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span>
+                      <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s">'hspace'</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">})</span>
+
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">plot</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">plot_type</span><span class="p">):</span>
+    <span class="n">axis</span><span class="o">=</span><span class="n">ax</span><span class="p">.</span><span class="n">flatten</span><span class="p">()[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span><span class="n">palette</span><span class="o">=</span><span class="n">custom_pallette</span><span class="p">)</span>
+    <span class="n">axis</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">plot</span><span class="p">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">axis</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">"Cell line"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    <span class="n">axis</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">"# Foci"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+    
+</code></pre></div></div>
+
+<p><img src="/cell-pythology/assets/img/seaborn_all_plots_wide_form.png" alt="all_plot" /></p>
+
+<p>Now breakdown the above code for beginners. 
+<code class="language-plaintext highlighter-rouge">custom_pallette=['salmon','cyan','lavender','palegreen']</code> this is a custom color palette defined by user.</p>
+
+<p>Then we make a list containing different function from seaborn module in the follwoing line <code class="language-plaintext highlighter-rouge">plot_type= [sns.violinplot,sns.boxplot, sns.boxenplot, sns.swarmplot] </code></p>
+
+<p>we make a figure <code class="language-plaintext highlighter-rouge">fig</code> and axes object <code class="language-plaintext highlighter-rouge">ax</code> by calling <code class="language-plaintext highlighter-rouge">plt.subplots()</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">nrows=2, ncols=2,</code> defines how many row and columns do I need, <code class="language-plaintext highlighter-rouge">figsize=(10,10)</code> set the size of the figure.</p>
+
+<p>grid spec key word arguments <code class="language-plaintext highlighter-rouge">gridspec_kw={'hspace': 0.3}</code> tells the function the horizontal spaces <code class="language-plaintext highlighter-rouge">'hspace'</code> will be <code class="language-plaintext highlighter-rouge">0.3</code> and it determines the space between two rows.</p>
+
+<p>Finally, we call <code class="language-plaintext highlighter-rouge">enumerate</code> function on <code class="language-plaintext highlighter-rouge">plot_type</code> list and draw the plots.</p>
+
+<p>Because different plots will be on different axes, we declare beforehand it by <code class="language-plaintext highlighter-rouge">axis=ax.flatten()[idx]</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">axis.set_title(plot.__name__, size=20)</code> set the title of each of the sub-plots and sizes of the titles and then the x-axis and y-axis label is defined in the following line</p>
+
+<p>This toturial should help plotting immunopstatining data into meaningful nice plot.</p>
+:ET
