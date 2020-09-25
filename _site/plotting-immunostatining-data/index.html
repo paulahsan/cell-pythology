@@ -280,7 +280,36 @@ experiemntal conditions and represent column names</p>
 
 <p><img src="/cell-pythology/assets/img/violinplot_wide_form.png" alt="violinplot" /></p>
 
-<h3 id="try-other-different-form-of-plots-sytematically">Try other different form of plots sytematically</h3>
+<h3 id="add-dotplot-to-the-violinplot">Add dotplot to the violinplot</h3>
+<p>Sometimes we want to add dot plot with boxplot. To render such plots just add one line of code with the previous block.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sns</span><span class="p">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">'RdBu'</span><span class="p">)</span>
+<span class="n">sns</span><span class="p">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">);</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Violin plot"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"Cell line and condition"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"Number of foci"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/cell-pythology/assets/img/violinplot_dotplot_wide_form.png" alt="violindotplot" /></p>
+
+<p>Let’s add some more parameters to the previous block and make it pretty.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sns</span><span class="p">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'lightgray'</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="bp">None</span><span class="p">);</span>
+<span class="n">sns</span><span class="p">.</span><span class="n">swarmplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s">'RdBu'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">"^"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s">'black'</span><span class="p">);</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">title</span><span class="p">(</span><span class="s">"Violin plot"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">22</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">"Cell line and condition"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">"Number of foci"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><img src="/cell-pythology/assets/img/violinplot_dotplot_pretty_wide_form.png" alt="violindotplotpretty" /></p>
+
+<p>What we did, in the first line changed the color of the individual boxes/violins. In the secomnd line of code we defined parameters for the palette and marker. The marker was set to upperward triangle, size of the marker was set to 8, linewidth of the marker was set to 0.5 and the color of the outer edger was set to black. More of such examples can be found in the <a href="https://seaborn.pydata.org/generated/seaborn.stripplot.html" target="_blank">following link of seaborn</a>.</p>
+
+<h3 id="try-other-different-form-of-plots-systematically">Try other different form of plots systematically</h3>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">custom_pallette</span><span class="o">=</span><span class="p">[</span><span class="s">'salmon'</span><span class="p">,</span><span class="s">'cyan'</span><span class="p">,</span><span class="s">'lavender'</span><span class="p">,</span><span class="s">'palegreen'</span><span class="p">]</span>
 <span class="n">plot_type</span><span class="o">=</span> <span class="p">[</span><span class="n">sns</span><span class="p">.</span><span class="n">violinplot</span><span class="p">,</span><span class="n">sns</span><span class="p">.</span><span class="n">boxplot</span><span class="p">,</span> <span class="n">sns</span><span class="p">.</span><span class="n">boxenplot</span><span class="p">,</span> <span class="n">sns</span><span class="p">.</span><span class="n">swarmplot</span><span class="p">]</span> 

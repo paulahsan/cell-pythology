@@ -176,6 +176,44 @@ plt.show()
 ![violinplot]({{site.baseurl}}/assets/img/violinplot_wide_form.png)
 
 
+### Add dotplot to the violinplot
+Sometimes we want to add dot plot with boxplot. To render such plots just add one line of code with the previous block.
+
+
+```python
+sns.violinplot(data=df, palette='RdBu')
+sns.stripplot(data=df);
+plt.title("Violin plot", size=22)
+plt.xlabel("Cell line and condition", size=20)
+plt.ylabel("Number of foci", size=20)
+plt.xticks(size=16)
+plt.show()
+```
+
+
+![violindotplot]({{site.baseurl}}/assets/img/violinplot_dotplot_wide_form.png)
+
+
+Let's add some more parameters to the previous block and make it pretty.
+
+
+```python
+sns.violinplot(data=df, color='lightgray', inner=None);
+sns.swarmplot(data=df, palette='RdBu', marker="^", size=5, linewidth=0.5, edgecolor='black');
+plt.title("Violin plot", size=22)
+plt.xlabel("Cell line and condition", size=20)
+plt.ylabel("Number of foci", size=20)
+plt.xticks(size=16)
+plt.show()
+```
+
+
+![violindotplotpretty]({{site.baseurl}}/assets/img/violinplot_dotplot_pretty_wide_form.png)
+
+
+What we did, in the first line changed the color of the individual boxes/violins. In the secomnd line of code we defined parameters for the palette and marker. The marker was set to upperward triangle, size of the marker was set to 8, linewidth of the marker was set to 0.5 and the color of the outer edger was set to black. More of such examples can be found in the [following link of seaborn](https://seaborn.pydata.org/generated/seaborn.stripplot.html){:target="_blank"}.
+
+
 ### Try other different form of plots systematically
 
 
