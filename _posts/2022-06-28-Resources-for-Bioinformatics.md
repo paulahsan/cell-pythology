@@ -9,7 +9,19 @@ search_exclude: flase
 categories: [references, bioinfo, resources]
 metadata_key1: metadata_value1
 metadata_key2: metadata_value2
+#---
+#layout: post
+#title: Immunostaining data vizualization
+#date: 2020-07-17 03:05:00 +0900
+#description: Discussion on collection of immunostaining data. # Add post description (optional)
+#img: h2ax-fig-comparison.png #immunostaining-data-collection.png
+#fig-caption: H2AX foci in different condition # Add figcaption (optional)
+#tags: [data, tidy data, immunostaining, data viz]
+#---
+
 ---
+
+
 # Important Resources
 
 ## RNAseq
