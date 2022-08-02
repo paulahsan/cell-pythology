@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Plotting Immunostaining Data
+title: Heatmap with theme RdYlBu
 date: 2022-08-02 15:05:00 +0900
 description: Tutorial for plotting heatmap. # Add post description (optional)
 
