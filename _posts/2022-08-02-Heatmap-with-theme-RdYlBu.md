@@ -4,7 +4,7 @@ title: Heatmap with theme RdYlBu
 date: 2022-08-02 15:05:00 +0900
 description: Tutorial for plotting heatmap. # Add post description (optional)
 img: output_10_0.png
-fig-caption: sample heatmap
+fig-caption: sample heatmap source:self
 tags: [data plotting, wide form data, heatmap, data viz]
 ---
 
@@ -126,7 +126,7 @@ plt.show()
 
 
     
-![png](output_10_0.png)
+![png]({{site.baseurl}}/assets/img/output_10_0.png)
     
 
 
