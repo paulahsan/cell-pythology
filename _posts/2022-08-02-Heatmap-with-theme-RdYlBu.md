@@ -126,7 +126,7 @@ plt.show()
 
 
     
-![png]({{site.baseurl}}/assets/img/output_10_0.png)
+![png](output_10_0.png)
     
 
 
