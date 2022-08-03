@@ -3,8 +3,8 @@ layout: post
 title: Analyze RNAseq with DESeq2
 date: 2022-08-03 14:53:00 +0900
 description: Tutorial for analyzing RNAseq data. # Add post description (optional)
-#img: Swarmplot-with-python_output_7_0.png
-#fig-caption: sample swarmplot source:author
+img: One-stop-RNAseq-with-DESeq2_output_39_0.png
+fig-caption: before and after normalization source:author
 
 tags: [data plotting, RNAseq, DESeq2, heatmap, data viz]
 ---
